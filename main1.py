@@ -170,6 +170,8 @@ def index1():
             print(audio_type+'-->wav')
             types=audio_type
             break
+        else:
+            types='wav'
     
     
     
@@ -188,7 +190,8 @@ def index1():
 @app.route('/download')
 def download_file():
     global types
-    audio_convert('extracted.wav',types)
+    if types!='wav':
+        audio_convert('extracted.wav',types)
     path = "./user audio data/extracted."+types
     return send_file(path, as_attachment=True)
 
