@@ -14,8 +14,16 @@ import subprocess
 count=0
 
 def audio_convert(filename,types):
-    replaced_filename=filename.replace('.m4a','.wav')
-    subprocess.call(['ffmpeg', '-i','./user audio data/'+filename, 
+
+    if 'wav' in filename:
+        print(filename,types)
+        replaced_filename=filename.replace('.wav','.'+types)
+        subprocess.call(['ffmpeg', '-i','./user audio data/'+filename, 
+    				'./user audio data/'+replaced_filename])
+        
+    else:
+        replaced_filename=filename.replace('.'+types,'.wav')
+        subprocess.call(['ffmpeg', '-i','./user audio data/'+filename, 
     				'./user audio data/'+replaced_filename])
 
 

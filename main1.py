@@ -20,13 +20,14 @@ time_frame_counter=0
 file_path=''
 filename=''
 convert_flag=0
+types=''
 
 cred = credentials.Certificate("voice-extraction-firebase-adminsdk-mxc5w-ec1c227e24.json")
 firebase_admin.initialize_app(cred, {"storageBucket": "voice-extraction.appspot.com"})
 
 
 def record(filename,filename_extracted):
-    global time_frame_counter
+    global time_frame_counter,types
     if not os.path.exists('./audio extracted data'):
         print('dir 1')
         os.mkdir('./audio extracted data')
@@ -114,6 +115,8 @@ def record(filename,filename_extracted):
         pass
     firebase_upload(filename_extracted)
     print('upload',filename_extracted)
+    print(types)
+    audio_convert('extracted.wav',types)
     
     if os.path.exists('./audio extracted data/'):
         shutil.rmtree('./audio extracted data/')
@@ -133,12 +136,14 @@ def record(filename,filename_extracted):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    if os.path.exists('./user audio data/'):
+        shutil.rmtree('./user audio data/')
     return render_template('index.html')
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def index1():
-    global file_path,filename
+    global file_path,filename,types,types_of_audio
     file_path = request.files['file']
     filename=file_path.filename
     firebase_upload(file_path)
@@ -163,12 +168,14 @@ def index1():
             audio_convert(filename,audio_type)
             filename=filename.replace(audio_type,'wav')
             print(audio_type+'-->wav')
+            types=audio_type
             break
     
     
     
     user_audio_file ='./user audio data/'+filename
     record(user_audio_file,filename)
+    
     return render_template("index1.html")
 
 # @app.route('/downloard', methods=['GET', 'POST'])
@@ -180,13 +187,16 @@ def index1():
 
 @app.route('/download')
 def download_file():
-    # Specify the path to the file you want to serve for download
-    path = "./user audio data/extracted.wav"
+    global types
+    audio_convert('extracted.wav',types)
+    path = "./user audio data/extracted."+types
     return send_file(path, as_attachment=True)
 
 
 @app.route('/home', methods=['GET', 'POST'])
 def index3():
+    if os.path.exists('./user audio data/'):
+        shutil.rmtree('./user audio data/')
     return render_template("index.html")
 
 if __name__ == '__main__':
