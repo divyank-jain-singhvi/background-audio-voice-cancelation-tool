@@ -169,9 +169,7 @@ def index1():
     
     user_audio_file ='./user audio data/'+filename
     record(user_audio_file,filename)
-    
-    result='./user audio data/extracted.wav'
-    return render_template("index1.html",result=result)
+    return render_template("index1.html")
 
 # @app.route('/downloard', methods=['GET', 'POST'])
 # def index2():

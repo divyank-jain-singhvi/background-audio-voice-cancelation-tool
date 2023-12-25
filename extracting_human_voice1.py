@@ -14,7 +14,7 @@ import subprocess
 count=0
 
 def audio_convert(filename,types):
-    replaced_filename=filename.replace('.'+types,'wav')
+    replaced_filename=filename.replace('.m4a','.wav')
     subprocess.call(['ffmpeg', '-i','./user audio data/'+filename, 
     				'./user audio data/'+replaced_filename])
 
@@ -25,6 +25,9 @@ def play_audio(play_file):
     play(audio)
 
 def firebase_upload(file_path):
+    dir_path = './user audio data'
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
     bucket = storage.bucket()
     try:
         blob = storage.bucket().blob(file_path.filename)
