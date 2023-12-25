@@ -1,0 +1,110 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.head{
+    display: flex;
+    font-size: 2.5vw;
+    max-width: 80%;
+    margin: auto;
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.file-size{
+    display: flex;
+    margin: auto;
+    font-size: 2vw;
+    margin-top: 3vh;
+}
+.file-size input{
+    border-width: 3px;
+    margin-left: 2vh;
+    border-radius: 5vh;
+    padding-left: 1.5vh;
+    font-size: 1.2vw;
+}
+.user-file{
+    display: flex;
+    margin: auto;
+    font-size: 1.7vw;
+    margin-top: 2vh;
+}
+.user-file input{
+    font-size: 1.2vw;
+    margin-left: 2vh;
+    border: 2px solid black;
+    border-radius: 5vh;
+    background-color: white;
+}
+.upload{
+    display: flex;
+    margin: auto;
+    max-width: 60%;
+    margin-top: 3vh;
+}
+.upload input{
+    width: 15vh;    
+    height: 5vh;
+    font-size: 1.2vw;
+    border-radius: 5vh;
+    box-shadow: 3px 2px 5px black;
+    transition: all .15s;
+    background-color: white;
+}
+.upload input:hover{
+    cursor: pointer;
+    border-color: red;
+    box-shadow: 2px 2px 5px red;
+}
+.upload input:active{
+    background: rgb(0, 255, 0);
+    box-shadow: 3px 2px 5px black;;
+    border-color: black;
+}
+.user-form{
+    max-width: 69%;
+    margin: auto;
+    background:linear-gradient(135deg,rgb(205, 250, 250),rgb(255, 243, 210),rgb(251, 251, 185));
+    padding-top: 1vh;
+    padding-bottom: 5vh;
+    margin-top: 3vh;
+    padding-left: 4vh;
+}
+@media (max-width: 1280px) {
+    .head{
+        font-size: 3.5vw;
+    }
+    .file-size{
+        flex-direction: column;
+        font-size: 3.5vw;
+        justify-content: center;
+    }
+    .file-size input{
+        margin-left:0;
+        padding: 1vh;
+        font-size: 3.5vw;
+        width: 30vh;
+        justify-content: center;
+        height: 2vw;
+    }
+    .user-file{
+        flex-direction: column;
+        margin-top: 2vh;
+        justify-content: center;
+        font-size: 3.5vw;
+    }
+    .user-file input{
+        font-size: 3.5vw;
+        margin-left: 0;
+        background-color: white;
+        justify-content: center;
+    }
+    .upload input{
+        font-size: 3.5vw;
+    }
+    .user-form{
+        padding-left: 1vw;
+        padding-right: 2vw;
+    }
+}
