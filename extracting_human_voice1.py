@@ -13,8 +13,8 @@ import subprocess
 
 count=0
 
-def mp3_to_wav(filename):
-    replaced_filename=filename.replace('mp3','wav')
+def audio_convert(filename,types):
+    replaced_filename=filename.replace('.'+types,'wav')
     subprocess.call(['ffmpeg', '-i','./user audio data/'+filename, 
     				'./user audio data/'+replaced_filename])
 

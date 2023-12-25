@@ -7,7 +7,10 @@ import shutil
 
 
 
-
+types_of_audio=('8svx','aac','ac3','aiff','amb','amr','ape','au','avr','caf','cdda','cvs','cvsd','cvu','dss','dts','dvms',
+                'fap','flac','fssd','gsm','gsrt','hcdm','htk','ima','ircam','m4a','m4r','maud','mp2','mp3','nist','oga',
+                'ogg','opus','paf','prc','pvf','ra','sd2','shn','sln','smp','snd','sndr','sndt','sou','sph','spx','tak','tta',
+                'txw','vms','voc','vox','vqf','w64','wma','wv','wve','xa')
 app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 duration = 15
@@ -143,10 +146,25 @@ def index1():
     firebase_extraction(filename)
     print('extract',filename)
     
-    if '.mp3' in filename:
-        mp3_to_wav(filename)
-        filename=filename.replace('.mp3','.wav')
-    print('mp3-->wav')
+    # if 'mp3' in filename:
+    #     audio_convert(filename)
+    #     filename=filename.replace('mp3','wav')
+    #     print('mp3-->wav')
+    # elif 'm4a' in filename:
+    #     audio_convert(filename,'m4a')
+    #     filename=filename.replace('m4a','wav')
+    #     print('m4a-->wav')
+    
+    
+    for audio_type in types_of_audio:
+        print(audio_type)
+        if audio_type in filename:
+            print('found')
+            audio_convert(filename,audio_type)
+            filename=filename.replace(audio_type,'wav')
+            print(audio_type+'-->wav')
+            break
+    
     
     
     user_audio_file ='./user audio data/'+filename
